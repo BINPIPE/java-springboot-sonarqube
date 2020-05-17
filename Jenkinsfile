@@ -1,5 +1,5 @@
 pipeline {
-        agent none
+        agent any
         stages {
 
         stage("Source") {
@@ -18,6 +18,7 @@ pipeline {
           }
 
           stage("SonarQube Analysis") {
+            agent any  
             steps {
               sh 'mvn sonar:sonar'
             }

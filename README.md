@@ -29,7 +29,8 @@ Follow the video for configuring the declarative pipeline with SonarQube Integra
 
 ++ **Slack Alerts in CI/CD Pipeline**
 
-The following snippet enables the slack-alerts stage in the CI/CD pipeline. Watch the video to see the configurations and the `Jenkins-Slack` Integration Process.
+The following snippet enables the slack-alerts stage in the CI/CD pipeline. 
+Watch the video to see the configurations and the `Jenkins-Slack` Integration Process.
 
 ```
 //Add this after the "stage" blocks end.

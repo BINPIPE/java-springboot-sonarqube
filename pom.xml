@@ -20,6 +20,7 @@
 
 	<dependencies>
 		
+				
 		
 		<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
 		<dependency>
@@ -62,6 +63,7 @@ http://192.168.0.155:9000
 </profile>
 </profiles>
 <!-- Profile ends for Sonar -->
+
 	
 	<build>
 		<plugins>

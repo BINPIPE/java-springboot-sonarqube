@@ -26,6 +26,62 @@ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
 Follow the video for configuring the declarative pipeline with SonarQube Integration & Analysis.
 
+
+Before running the Job ensure the following code snippets are added to the pom.xml file in order to Run Sonar Tests:
+
+1. To be added inside <dependencies> block-
+
+```
+<!-- https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+		<dependency>
+			<groupId>org.sonarsource.scanner.maven</groupId>
+			<artifactId>sonar-maven-plugin</artifactId>
+			<version>3.2</version>
+		</dependency>
+		<!-- sonar block ends -->
+		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+                
+  ```
+  2. Profiles block to be added after </dependencies> block (replace the IP with the IP adress of your Sonar Server)-
+  
+  ```
+  <!-- Profile added for Sonar -->
+	<profiles>
+<profile>
+<id>sonar</id>
+<activation>
+<activeByDefault>true</activeByDefault>
+</activation>
+<properties>
+<!-- Optional URL to server. Default value is http://localhost:9000 -->
+<sonar.host.url>
+http://192.168.0.155:9000
+</sonar.host.url>
+</properties>
+</profile>
+</profiles>
+<!-- Profile ends for Sonar -->
+  ```
+  
+  
+
+
 The following code snippet is added to the Jenkins Pipeline script:
 
 

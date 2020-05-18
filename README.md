@@ -26,6 +26,58 @@ docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
 
 Follow the video for configuring the declarative pipeline with SonarQube Integration & Analysis.
 
+The following code snippet is added to the Jenkins Pipeline script:
+
+
+```
+pipeline {
+        agent any
+        stages {
+
+        stage("Source") {
+          agent any
+          steps {
+              git branch: 'master', url: 'https://github.com/BINPIPE/java-springboot-sonarqube.git'
+          }
+        }
+
+        
+          stage("Build") {
+            agent any
+            steps {
+                sh 'mvn clean package'
+            }
+          }
+
+          stage("SonarQube Analysis") {
+            agent any  
+            steps {
+              sh 'mvn sonar:sonar'
+            }
+          }
+
+          stage('Approve Deployment') {
+              agent any
+              input{
+                   message "Do you want to proceed for deployment?"
+                      }
+              steps {
+                  //Add deploy steps & Alerts below
+                  sh 'echo "Deploying into Server"' 
+
+                }
+          } 
+          
+        }
+        
+}
+
+
+```
+
+
+
+
 
 ++ **Slack Alerts in CI/CD Pipeline**
 
